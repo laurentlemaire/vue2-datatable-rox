@@ -1,12 +1,12 @@
 <template>
   <tbody>
     <template v-if="data.length">
-      <template v-for="item in data">
+      <template v-for="(item, index) in data">
         <tr>
           <td v-if="shouldRenderSelection">
             <multi-select :selection="selection" :row="item" />
           </td>
-          <td v-for="col in columns" :class="col.tdClass" :style="col.tdStyle">
+          <td v-for="(col, colIndex) in columns" :class="col.tdClass" :style="col.tdStyle">
         <div>
             <!-- <td> component (tdComp) -->
             <component
@@ -16,7 +16,10 @@
               :field="col.field"
               :value="item[col.field]"
               :nested="item.__nested__"
-              v-bind="$props">
+              v-bind="$props"
+              v-bind:index="index"
+              v-bind:colIndex="colIndex"
+            >
             </component>
             <template v-else>
               {{ item[col.field] }}
@@ -50,7 +53,6 @@
 import MultiSelect from './MultiSelect.vue'
 import props from '../_mixins/props'
 import shouldRenderSelection from '../_mixins/shouldRenderSelection'
-
 export default {
   name: 'TableBody',
   components: { MultiSelect },
