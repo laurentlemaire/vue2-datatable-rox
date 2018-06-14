@@ -41,21 +41,34 @@ export default {
     updated () {
         // TODO : only trigger this once
 
-        setTimeout(function(){
+         setInterval(function(){
             let tableBodyDivs = $('.-table-body tr:first-child td > div');
+            let tableBodyCols = $('.-table-body colgroup col');
             let tableHeadDivs = $('.-table-header tr:first-child th > div');
+            let tableHeadCols = $('.-table-header colgroup col');
 
             let index = 0;
-            tableBodyDivs.each(function(){
 
+            tableBodyDivs.each(function(){
+                let width = 0;
                 if ($(this).width() > $(tableHeadDivs[index]).width()) {
-                    $(tableHeadDivs[index]).width($(this).width())
+                    width = Math.round($(this).width());
+
                 } else {
-                    $(this).width($(tableHeadDivs[index]).width());
+                    width = Math.round($(tableHeadDivs[index]).width())
+
                 }
+
+                //if (width < 20) width = 40;
+
+                $(tableBodyCols[index]).width(width);
+                $(tableHeadCols[index]).width(width);
+                $(tableHeadDivs[index]).width(width);
+                $(this).width(width);
 
                 index++;
             })
+            //console.log('resize');
         }, 2000);
 
     },
