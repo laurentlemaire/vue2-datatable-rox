@@ -13,7 +13,10 @@
       </div>
       <div class="clearfix" style="margin: 10px 0">
         <div class="btn-group btn-group-sm pull-right">
-          <button class="btn btn-default" type="button" @click="apply()">
+          <!-- <button class="btn btn-default" type="button" @click="apply()">
+            {{ $i18nForDatatable('Apply') }}
+          </button>-->
+          <button class="btn btn-default" type="button" @click="apply(true)">
             {{ $i18nForDatatable('Apply') }}
           </button>
           <template v-if="supportBackup">
@@ -21,13 +24,14 @@
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button" style="box-shadow: none">
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li class="dropdown-item" @click="apply(true)">
+                <ul class="dropdown-menu dropdown-menu-right" v-if="usingBak">
+                  <!--<li class="dropdown-item" @click="apply(true)">
                     <a href="#" @click.prevent>
                       <i class="fas fa-save"></i>&nbsp;
                       {{ $i18nForDatatable('Apply & Save') }}
                     </a>
                   </li>
+                  -->
                   <li  class="dropdown-item" v-if="usingBak" @click="rmBackup()">
                     <a href="#" @click.prevent>
                       <i class="fa fa-trash"></i>&nbsp;

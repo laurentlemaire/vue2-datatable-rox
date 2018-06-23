@@ -51,8 +51,9 @@ export default {
 
             tableBodyDivs.each(function(){
                 let width = 0;
-                if ($(this).width() > $(tableHeadDivs[index]).width()) {
-                    width = Math.round($(this).width());
+                if ($(this).parent('td').width() > $(tableHeadDivs[index]).width()) {
+                    // Applying TD col to the DIV to which we need to remove TD border to match correctly
+                    width = Math.round($(this).parent('td').width() + 2);
 
                 } else {
                     width = Math.round($(tableHeadDivs[index]).width())
